@@ -4,7 +4,7 @@ const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'saep_db1'
+    database: 'saep_db'
 });
 
 connection.connect((erro) =>{

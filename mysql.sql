@@ -1,13 +1,13 @@
 -- =====================================================
 -- CRIAÇÃO DO BANCO
 -- =====================================================
-CREATE SCHEMA IF NOT EXISTS `saep_db1` DEFAULT CHARACTER SET utf8 ;
-USE `saep_db1` ;
+CREATE SCHEMA IF NOT EXISTS `saep_db` DEFAULT CHARACTER SET utf8 ;
+USE `saep_db` ;
 
 -- -----------------------------------------------------
 -- Tabela CATEGORIA
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `saep_db1`.`CATEGORIA` (
+CREATE TABLE IF NOT EXISTS `saep_db`.`CATEGORIA` (
   `id_categoria` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `descricao` VARCHAR(100) NOT NULL,
@@ -17,7 +17,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Tabela PRODUTO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `saep_db1`.`PRODUTO` (
+CREATE TABLE IF NOT EXISTS `saep_db`.`PRODUTO` (
   `id_produto` INT NOT NULL AUTO_INCREMENT,
   `id_categoria` INT NOT NULL,
   `nome` VARCHAR(45) NOT NULL,
@@ -42,7 +42,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Tabela USUARIO
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `saep_db1`.`USUARIO` (
+CREATE TABLE IF NOT EXISTS `saep_db`.`USUARIO` (
   `id_usuario` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `login` VARCHAR(45) NOT NULL,
@@ -53,7 +53,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Tabela MOVIMENTACAO_ESTOQUE
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `saep_db1`.`MOVIMENTACAO_ESTOQUE` (
+CREATE TABLE IF NOT EXISTS `saep_db`.`MOVIMENTACAO_ESTOQUE` (
   `id_movimentacao` INT NOT NULL AUTO_INCREMENT,
   `id_produto` INT NOT NULL,
   `id_usuario` INT NOT NULL,
@@ -82,7 +82,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- CATEGORIA
 -- -----------------------------------------------------
-INSERT INTO `saep_db1`.`CATEGORIA` (`nome`, `descricao`) VALUES
+INSERT INTO `saep_db`.`CATEGORIA` (`nome`, `descricao`) VALUES
 ('Fundação', 'Materiais utilizados na base da construção'),
 ('Acabamento', 'Materiais utilizados na fase final da obra'),
 ('Estrutura', 'Materiais utilizados na estrutura da construção');
@@ -90,7 +90,7 @@ INSERT INTO `saep_db1`.`CATEGORIA` (`nome`, `descricao`) VALUES
 -- -----------------------------------------------------
 -- PRODUTO
 -- -----------------------------------------------------
-INSERT INTO `saep_db1`.`PRODUTO`
+INSERT INTO `saep_db`.`PRODUTO`
 (`id_categoria`, `nome`, `cor`, `textura`, `peso`, `unidade_medida`, `aplicacao`, `data_validade`, `estoque_minimo`, `estoque_atual`, `preco_unitario`) VALUES
 (3, 'Cimento CP II', 'Cinza', 'Fino', 50.00, 'kg', 'Estrutura', '2027-01-15', 20, 120, 32.90),
 (2, 'Tinta Acrílica Branca', 'Branco', 'Fosca', 18.00, 'L', 'Acabamento', '2028-06-10', 10, 45, 189.90),
@@ -99,7 +99,7 @@ INSERT INTO `saep_db1`.`PRODUTO`
 -- -----------------------------------------------------
 -- USUARIO
 -- -----------------------------------------------------
-INSERT INTO `saep_db1`.`USUARIO` (`nome`, `login`, `senha_hash`) VALUES
+INSERT INTO `saep_db`.`USUARIO` (`nome`, `login`, `senha_hash`) VALUES
 ('Ana Silva', 'ana.silva', 'senha123'),
 ('Carlos Souza', 'carlos.souza', 'senha456'),
 ('Mariana Costa', 'mariana.costa', 'senha789');
@@ -107,13 +107,8 @@ INSERT INTO `saep_db1`.`USUARIO` (`nome`, `login`, `senha_hash`) VALUES
 -- -----------------------------------------------------
 -- MOVIMENTACAO_ESTOQUE
 -- -----------------------------------------------------
-INSERT INTO `saep_db1`.`MOVIMENTACAO_ESTOQUE`
+INSERT INTO `saep_db`.`MOVIMENTACAO_ESTOQUE`
 (`id_produto`, `id_usuario`, `tipo_movimentacao`, `quantidade`, `data_movimentacao`) VALUES
 (1, 1, 'entrada', 200, '2026-07-01 09:30:00'),
 (2, 2, 'saida', 5, '2026-07-10 14:15:00'),
 (3, 3, 'saida', 12, '2026-08-15 11:00:00');
-
-select * from CATEGORIA;
-select * from PRODUTO;
-select * from USUARIO;
-select * from MOVIMENTACAO_ESTOQUE;
