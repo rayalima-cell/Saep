@@ -90,6 +90,46 @@ server.post('/produtos', (req, res) => {
 
 });
 
+server.put('/produtos/:id', (req, res) =>{
+    const {nome, cor, textura, peso,unidade_medida, aplicacao, 
+        data_validade, estoque_minimo, 
+        estoque_atual, preco_unitario, id_categoria
+    } = req.body
+
+    const {id} = req.params;
+
+    const sql = `UPDATE PRODUTO SET nome = ?, cor = ?, textura = ?, peso = ?, unidade_medida = ?, aplicacao = ?,
+        data_validade = ?, estoque_minimo = ?, 
+        estoque_atual = ?, preco_unitario = ?, id_categoria = ? WHERE id_produto = ?`;
+
+    connection.query(sql, [nome, cor, textura, peso, unidade_medida, aplicacao, 
+        data_validade, estoque_minimo, 
+        estoque_atual, preco_unitario, id_categoria, id], (erro, resultado) => {
+        if(erro){
+            return res.status(500).json({erro: erro.message})
+        }
+        res.json({
+            mensagem: 'Produto atualizado com sucesso'
+        })
+    });
+    
+})
+
+server.delete('/produtos/:id', (req, res) => {
+    const {id} = req.params;
+
+    const sql = 'DELETE FROM PRODUTO WHERE id_produto = ?';
+
+    connection.query(sql, [id], (erro) => {
+        if(erro){
+            return res.status(500).json({erro: erro.message})
+        }
+        res.json({
+            mensagem: 'Produto deletado com sucesso'
+        })
+    });
+});
+
 server.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
